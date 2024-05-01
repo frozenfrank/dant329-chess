@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Represents a single chess piece
@@ -51,6 +52,113 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        throw new RuntimeException("Not implemented");
+
+        Collection<ChessMove> moves = new HashSet<>();
+
+        //BISHOP MOVE SET
+        if(this.getPieceType() == PieceType.BISHOP) {
+            int row = myPosition.getRow();
+            int column = myPosition.getColumn();
+            //check up-right diagonal:
+            while(row < 8 && column < 8) {
+                //IsEmpty? move:check conditions
+                ChessPosition currentCheck = new ChessPosition(row+1, column+1);
+                if(board.getPiece(currentCheck) == null){
+                    //add to collection
+                    moves.add(new ChessMove(myPosition,currentCheck,null));
+                    System.out.println("Adding move to row: " + currentCheck.getRow());
+                    System.out.println("Adding move to column: " + currentCheck.getColumn());
+                    row++;
+                    column++;
+                }else{
+                    //friendly?
+                    if (board.getPiece(currentCheck).pieceColor != this.pieceColor) {
+                        //add board position to collection and then break;
+                        moves.add(new ChessMove(myPosition, currentCheck, null));
+                        System.out.println("Adding move to row: " + currentCheck.getRow());
+                        System.out.println("Adding move to column: " + currentCheck.getColumn());
+                    }
+                    break;
+                }
+            }
+
+
+            //check down-right diagonal:
+            row = myPosition.getRow();
+            column = myPosition.getColumn();
+
+            while(row > 1 && column < 8) {
+                //IsEmpty? move:check conditions
+                ChessPosition currentCheck = new ChessPosition(row-1, column+1);
+                if(board.getPiece(currentCheck) == null){
+                    //add to collection
+                    moves.add(new ChessMove(myPosition,currentCheck,null));
+                    System.out.println("Adding move to row: " + currentCheck.getRow());
+                    System.out.println("Adding move to column: " + currentCheck.getColumn());
+                    row--;
+                    column++;
+                }else{
+                    //friendly?
+                    if (board.getPiece(currentCheck).pieceColor != this.pieceColor) {
+                        //add board position to collection and then break;
+                        moves.add(new ChessMove(myPosition, currentCheck, null));
+                        System.out.println("Adding move to row: " + currentCheck.getRow());
+                        System.out.println("Adding move to column: " + currentCheck.getColumn());
+                    }
+                    break;
+                }
+            }
+            //check down-left diagonal:
+            row = myPosition.getRow();
+            column = myPosition.getColumn();
+
+            while(row > 1 && column > 1) {
+                //IsEmpty? move:check conditions
+                ChessPosition currentCheck = new ChessPosition(row-1, column-1);
+                if(board.getPiece(currentCheck) == null){
+                    //add to collection
+                    moves.add(new ChessMove(myPosition,currentCheck,null));
+                    System.out.println("Adding move to row: " + currentCheck.getRow());
+                    System.out.println("Adding move to column: " + currentCheck.getColumn());
+                    row--;
+                    column--;
+                }else{
+                    //friendly?
+                    if (board.getPiece(currentCheck).pieceColor != this.pieceColor) {
+                        //add board position to collection and then break;
+                        moves.add(new ChessMove(myPosition, currentCheck, null));
+                        System.out.println("Adding move to row: " + currentCheck.getRow());
+                        System.out.println("Adding move to column: " + currentCheck.getColumn());
+                    }
+                    break;
+                }
+            }
+            //check up-left diagonal:
+            row = myPosition.getRow();
+            column = myPosition.getColumn();
+
+            while(row < 8 && column > 1) {
+                //IsEmpty? move:check conditions
+                ChessPosition currentCheck = new ChessPosition(row+1, column-1);
+                if(board.getPiece(currentCheck) == null){
+                    //add to collection
+                    moves.add(new ChessMove(myPosition,currentCheck,null));
+                    System.out.println("Adding move to row: " + currentCheck.getRow());
+                    System.out.println("Adding move to column: " + currentCheck.getColumn());
+                    row++;
+                    column--;
+                }else{
+                    //friendly?
+                    if (board.getPiece(currentCheck).pieceColor != this.pieceColor) {
+                        //add board position to collection and then break;
+                        moves.add(new ChessMove(myPosition, currentCheck, null));
+                        System.out.println("Adding move to row: " + currentCheck.getRow());
+                        System.out.println("Adding move to column: " + currentCheck.getColumn());
+                    }
+                    break;
+                }
+            }
+        }
+    return moves;
     }
 }
