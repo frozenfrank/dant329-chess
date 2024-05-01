@@ -13,7 +13,7 @@ public class ChessBoard {
     // something to hold board state I guess
     // use a map since I don't want to create a hash for position
 
-    private HashMap<ChessPosition,ChessPiece> board;
+    private HashMap<String,ChessPiece> board;
 
     public ChessBoard() {
         this.board = new HashMap<>();
@@ -26,7 +26,10 @@ public class ChessBoard {
      * @param piece    the piece to add
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
-        this.board.put(position,piece);
+        int row = position.getRow();
+        int column = position.getColumn();
+        String hashkey = row + "," + column;
+        this.board.put(hashkey,piece);
     }
 
     /**
@@ -37,7 +40,10 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        return this.board.get(position);
+        int row = position.getRow();
+        int column = position.getColumn();
+        String hashkey = row + "," + column;
+        return this.board.get(hashkey);
     }
 
     /**
