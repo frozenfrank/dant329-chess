@@ -57,94 +57,11 @@ public class ChessPiece {
         Collection<ChessMove> moves = new HashSet<>();
 
         //BISHOP MOVE SET
-        if(this.getPieceType() == PieceType.BISHOP) {
-            int row = myPosition.getRow();
-            int column = myPosition.getColumn();
-            //check up-right diagonal:
-            while(row < 8 && column < 8) {
-                //IsEmpty? move:check conditions
-                ChessPosition currentCheck = new ChessPosition(row+1, column+1);
-                if(board.getPiece(currentCheck) == null){
-                    //add to collection
-                    moves.add(new ChessMove(myPosition,currentCheck,null));
-                    row++;
-                    column++;
-                }else{
-                    //friendly?
-                    if (board.getPiece(currentCheck).pieceColor != this.pieceColor) {
-                        //add board position to collection and then break;
-                        moves.add(new ChessMove(myPosition, currentCheck, null));
-                    }
-                    break;
-                }
-            }
+        if (this.getPieceType() == PieceType.BISHOP) {
+        moves = BishopMoveCalc.staticMove(board,myPosition,this.pieceColor);
 
-
-            //check down-right diagonal:
-            row = myPosition.getRow();
-            column = myPosition.getColumn();
-
-            while(row > 1 && column < 8) {
-                //IsEmpty? move:check conditions
-                ChessPosition currentCheck = new ChessPosition(row-1, column+1);
-                if(board.getPiece(currentCheck) == null){
-                    //add to collection
-                    moves.add(new ChessMove(myPosition,currentCheck,null));
-                    row--;
-                    column++;
-                }else{
-                    //friendly?
-                    if (board.getPiece(currentCheck).pieceColor != this.pieceColor) {
-                        //add board position to collection and then break;
-                        moves.add(new ChessMove(myPosition, currentCheck, null));
-                    }
-                    break;
-                }
-            }
-            //check down-left diagonal:
-            row = myPosition.getRow();
-            column = myPosition.getColumn();
-
-            while(row > 1 && column > 1) {
-                //IsEmpty? move:check conditions
-                ChessPosition currentCheck = new ChessPosition(row-1, column-1);
-                if(board.getPiece(currentCheck) == null){
-                    //add to collection
-                    moves.add(new ChessMove(myPosition,currentCheck,null));
-                    row--;
-                    column--;
-                }else{
-                    //friendly?
-                    if (board.getPiece(currentCheck).pieceColor != this.pieceColor) {
-                        //add board position to collection and then break;
-                        moves.add(new ChessMove(myPosition, currentCheck, null));
-                    }
-                    break;
-                }
-            }
-            //check up-left diagonal:
-            row = myPosition.getRow();
-            column = myPosition.getColumn();
-
-            while(row < 8 && column > 1) {
-                //IsEmpty? move:check conditions
-                ChessPosition currentCheck = new ChessPosition(row+1, column-1);
-                if(board.getPiece(currentCheck) == null){
-                    //add to collection
-                    moves.add(new ChessMove(myPosition,currentCheck,null));
-                    row++;
-                    column--;
-                }else{
-                    //friendly?
-                    if (board.getPiece(currentCheck).pieceColor != this.pieceColor) {
-                        //add board position to collection and then break;
-                        moves.add(new ChessMove(myPosition, currentCheck, null));
-                    }
-                    break;
-                }
-            }
         }
-    return moves;
+        return moves;
     }
 
     @Override
