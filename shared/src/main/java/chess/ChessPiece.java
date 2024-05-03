@@ -63,6 +63,8 @@ public class ChessPiece {
             moves = KingMoveCalc.staticMove(board,myPosition,this.pieceColor);
         }else if(this.getPieceType() == PieceType.KNIGHT){
             moves = KnightMoveCalc.staticMove(board,myPosition,this.pieceColor);
+        }else if(this.getPieceType() == PieceType.ROOK){
+            moves = RookMoveCalc.staticMove(board,myPosition,this.pieceColor);
         }
         return moves;
     }
